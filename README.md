@@ -6,5 +6,3 @@ Conway chose his rules carefully, after considerable experimentation, to meet th
  2. There should exist small initial patterns with chaotic, unpredictable outcomes.
  3. There should be potential for [von Neumann universal constructors](https://en.wikipedia.org/wiki/Von_Neumann_universal_constructor).
  4. The rules should be as simple as possible, whilst adhering to the above constraints.
-
-
