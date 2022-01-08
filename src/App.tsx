@@ -1,7 +1,9 @@
 import React, { useCallback, useRef, useState } from "react";
 import produce from "immer";
 
-const numRows = 40;
+import { Paper, Button } from "@mui/material";
+
+const numRows = 30;
 const numCols = 50;
 
 const operations = [
@@ -69,43 +71,75 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <button
-        onClick={() => {
-          setRunning(!running);
-          if (!running) {
-            runningRef.current = true;
-            runSimulation();
-          }
-        }}
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <Paper
+        elevation={3}
+        style={{ height: "10vh", margin: 20, marginBottom: 0, width: "1000px", display: "flex", alignItems: "center", justifyContent: "center" }}
       >
-        {running ? "Stop" : "Start"}
-      </button>
-      <button
-        onClick={() => {
-          setGrid(EmptyGrid());
-        }}
-      >
-        Clear
-      </button>
-      <button
-        onClick={() => {
-          const rows = [];
-          for (let i = 0; i < numRows; i++) {
-            rows.push(
-              Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
-            );
-          }
+        <Button
+          color="success"
+          style={{
+            height: "90px",
+            width: "300px",
+            marginRight: 15,
+            marginLeft: 15,
+          }}
+          onClick={() => {
+            setRunning(!running);
+            if (!running) {
+              runningRef.current = true;
+              runSimulation();
+            }
+          }}
+        >
+          <h1>{running ? "Stop" : "Start"}</h1>
+        </Button>
+        <Button
+          color="error"
+          size="large"
+          style={{
+            height: "90px",
+            width: "300px",
+            marginRight: 15,
+            marginLeft: 15,
+          }}
+          onClick={() => {
+            setGrid(EmptyGrid());
+          }}
+        >
+          <h1>Clear</h1>
+        </Button>
+        <Button
+          color="primary"
+          style={{
+            height: "90px",
+            width: "300px",
+            marginRight: 15,
+            marginLeft: 15,
+          }}
+          onClick={() => {
+            const rows = [];
+            for (let i = 0; i < numRows; i++) {
+              rows.push(
+                Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
+              );
+            }
 
-          setGrid(rows);
-        }}
-      >
-        Seed Random
-      </button>
-      <div
+            setGrid(rows);
+          }}
+        >
+          <h1>Seed Random</h1>
+        </Button>
+      </Paper>
+      <Paper
+        elevation={3}
         style={{
           display: "grid",
           gridTemplateColumns: `repeat(${numCols}, 20px)`,
+          width: "1000px",
+          margin: 20,
         }}
       >
         {grid.map((rows, i) =>
@@ -127,8 +161,8 @@ const App: React.FC = () => {
             />
           ))
         )}
-      </div>
-    </>
+      </Paper>
+    </div>
   );
 };
 
